@@ -1,0 +1,5 @@
+steps:
+- name: 'docker'
+  args: ['build','-t','us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project','.']
+images:
+- 'us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project'
