@@ -4,6 +4,6 @@ options:
 steps:
 
 - name: 'docker'
-  args: ['build','-t','us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project','.']
+  args: ['build','-t','us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image','.']
 images:
-- 'us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project'
+- 'us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image'
