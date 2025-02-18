@@ -3,7 +3,33 @@ options:
 
 steps:
 
-- name: 'docker'
-  args: ['build','-t','us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image','.']
-images:
-- 'us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image'
+# - name: 'docker'
+#   args: ['build','-t','us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image','.']
+# images:
+# - 'us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image'
+
+# build the container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image", "."]
+
+# push container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image"]
+
+# deploy the container image to GKE
+# - name: "gcr.io/cloud-builders/kubectl"
+#   args: ["set", "image", "deployment/gcp-devops-gke", "gcp-devops-gke=us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image:latest"]
+#   env:
+#   - "CLOUDSDK_COMPUTE_ZONE=us-west1-a"
+#   - "CLOUDSDK_CONTAINER_CLUSTER=gke-cluster-1"
+#   - "CLOUDSDK_CORE_PROJECT=kodekloud-gke-practice"
+
+# deploy the container image to GKE
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=gke.yaml
+  - --image=us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image:latest
+  - --location=us-west1-a
+  - --cluster=gcp-gke-devops
+  - --namespace=gcp-devops-prod
