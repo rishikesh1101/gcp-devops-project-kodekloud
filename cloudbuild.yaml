@@ -10,11 +10,11 @@ steps:
 
 # build the container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image", "."]
+  args: ["build", "-t", "us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image-dev", "."]
 
 # push container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image"]
+  args: ["push", "us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image-dev"]
 
 # deploy the container image to GKE
 # - name: "gcr.io/cloud-builders/kubectl"
@@ -29,7 +29,7 @@ steps:
   args:
   - run
   - --filename=gke.yaml
-  - --image=us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image:latest
+  - --image=us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image-dev:latest
   - --location=us-west1-a
   - --cluster=gcp-devops-project
-  - --namespace=gcp-devops-prod
+  - --namespace=gcp-devops-dev
