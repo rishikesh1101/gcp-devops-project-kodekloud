@@ -31,5 +31,5 @@ steps:
   - --filename=gke.yaml
   - --image=us-west1-docker.pkg.dev/kodekloud-gke-practice/gcp-devops-project/python-docker-image:latest
   - --location=us-west1-a
-  - --cluster=gcp-gke-devops
+  - --cluster=gcp-devops-project
   - --namespace=gcp-devops-prod
